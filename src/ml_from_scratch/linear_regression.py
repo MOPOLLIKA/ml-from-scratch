@@ -1,7 +1,8 @@
 import numpy as np
 
 
-class SGDLinReg:
+class GDLinReg:
+    """Batch Gradient Descent linear regression model."""
     def __init__(self):
         # bias included as zero-th coef
         self._W: np.ndarray
