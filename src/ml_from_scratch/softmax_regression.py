@@ -12,7 +12,7 @@ class SoftReg:
         self._epoch_stopped = 0
         self._losses = []
 
-    def fit(self, X, y, n_epochs=500, eta=1e-2, tolerance=1e-3):
+    def fit(self, X, y, n_epochs=500, eta=1e-2, tolerance=1e-3, alpha=1e-2):
         self._classes = np.unique(y)
         y_true = cls_to_idx(y)
         m = X.shape[0]
@@ -30,8 +30,8 @@ class SoftReg:
             proba = softmax(scores)
             y_true_onehot = onehot(y_true)
             error = proba - y_true_onehot
-            nabla = (error.T @ X_padded / m).T
-            self._W = self._W - eta*nabla
+            grad = (error.T @ X_padded / m).T
+            self._W = self._W - eta*grad
 
             y_pred_proba = self.predict_proba(X)
             loss = cross_entropy(y_pred_proba, y_true_onehot)

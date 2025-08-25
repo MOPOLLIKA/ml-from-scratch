@@ -16,8 +16,8 @@ class GDLinReg:
         self._W = np.random.rand(self._n_features+1, 1)
         for _ in range(n_epochs):
             total_error = X_padded @ self._W - y
-            nabla = (2/X_padded.shape[0])*(X_padded.T @ total_error)
-            self._W = self._W - eta*nabla
+            grad = (2/X_padded.shape[0])*(X_padded.T @ total_error)
+            self._W = self._W - eta*grad
         self._fitted = True
 
     def predict(self, X):
