@@ -31,6 +31,7 @@ class SoftReg:
             y_true_onehot = onehot(y_true)
             error = proba - y_true_onehot
             grad = (error.T @ X_padded / m).T
+            grad += np.r_[np.zeros((1, n_classes)), alpha*self._W[1:]]
             self._W = self._W - eta*grad
 
             y_pred_proba = self.predict_proba(X)
