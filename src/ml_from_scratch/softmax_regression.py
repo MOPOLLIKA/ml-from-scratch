@@ -33,7 +33,7 @@ class SoftReg:
             grad = (error.T @ X_padded / m).T
             grad += np.r_[np.zeros((1, n_classes)), alpha*self._W[1:]]
             self._W = self._W - eta*grad
-
+            # early stopping functionality
             y_pred_proba = self.predict_proba(X)
             loss = cross_entropy(y_pred_proba, y_true_onehot)
             self._losses.append(loss)
